@@ -14,33 +14,39 @@ public class Witch : MonoBehaviour
 {
     public string animtionParamater;
     Animator anim;
+    AudioSource audioS;
+    AudioClip clip;
 
 
 
     private void Start()
     {
         anim = GetComponent<Animator>();
-
+        audioS = GetComponent<AudioSource>();
+        clip = audioS.clip;
     }
 
 private void OnTriggerEnter(Collider other)
     {
       if(other.tag == "Player")
         {
-            anim.SetBool(animtionParamater, true);
+            anim.SetTrigger(animtionParamater);
         }
     }
 
-private void OnTriggerExit(Collider other)
+////private void OnTriggerExit(Collider other)
+////    {
+////        if (other.tag == "Player")
+////        {
+////            anim.Trigger(animtionParamater, false);
+////        }
+////    }
+
+
+    void playCackle()
     {
-        if (other.tag == "Player")
-        {
-            anim.SetBool(animtionParamater, false);
-        }
+        audioS.PlayOneShot(clip);
     }
-
-
-
 
 
 }
